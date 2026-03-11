@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Embedded-разработчик | Портфолио</title>
+    
+    <!-- Локальный Bootstrap CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Локальный файл стилей -->
+    <link href="css/style.css" rel="stylesheet">
+    
+    <!-- Bootstrap Icons (можно оставить CDN или скачать локально) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Навигация -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="bi bi-cpu"></i>IV | Embedded
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="#">Главная</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#projects">Проекты</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">Обо мне</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Контакты</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Герой (Hero) секция -->
+    <section class="hero text-center">
+        <div class="container">
+            <h1>Embedded-разработчик / Инженер-схемотехник</h1>
+            <p class="lead mx-auto">Проектирую платы в Altium Designer, пишу прошивки на C для STM32/ESP32/AVR, создаю ПО на C# и Python для автоматизации. Полный цикл: от идеи до работающего образца.</p>
+            <div class="d-flex flex-wrap justify-content-center mt-4">
+                <span class="skill-badge"><i class="bi bi-motherboard me-1"></i>Altium Designer</span>
+                <span class="skill-badge"><i class="bi bi-cpu me-1"></i>STM32 F0/F1/F4/F7/H7</span>
+                <span class="skill-badge"><i class="bi bi-wifi me-1"></i>ESP32</span>
+                <span class="skill-badge"><i class="bi bi-code-square me-1"></i>C / CMSIS / SPL / LL / HAL</span>
+                <span class="skill-badge"><i class="bi bi-file-earmark-code me-1"></i>Python</span>
+                <span class="skill-badge"><i class="bi bi-file-earmark-code me-1"></i>C#</span>
+                <span class="skill-badge"><i class="bi bi-hdd-stack me-1"></i>4-слойные платы</span>
+            </div>
+            <div class="mt-4">
+                <a href="#projects" class="btn btn-light btn-lg rounded-pill px-4 me-2"><i class="bi bi-journal-code me-2"></i>Проекты</a>
+                <a href="#contact" class="btn btn-outline-light btn-lg rounded-pill px-4"><i class="bi bi-envelope me-2"></i>Контакты</a>
+            </div>
+        </div>
+    </section>
+
+    <div class="container" id="projects">
+        <!-- Секция: Ключевая экспертиза -->
+        <div class="experience-badge">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h3 class="fw-bold mb-3" style="color: var(--primary-dark);"><i class="bi bi-tools me-2"></i>Полный цикл разработки</h3>
+                    <p class="mb-0">Проектирую принципиальные схемы и печатные платы (2-4 слоя) в Altium Designer. Пишу встраиваемое ПО на C (CMSIS, SPL, LL, HAL) для STM32, AVR, ESP32. Создаю инструменты на Python и C# для автоматизации и взаимодействия с устройствами. Работаю с высоким напряжением, гальванической развязкой, промышленными интерфейсами.</p>
+                </div>
+                <div class="col-md-4 text-md-end mt-3 mt-md-0">
+                    <span class="chip"><i class="bi bi-check-circle-fill text-success me-1"></i>5+ проектов</span>
+                    <span class="chip"><i class="bi bi-check-circle-fill text-success me-1"></i>3 успешно внедрены</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Заголовок проектов -->
+        <h2 class="section-title">Представленные проекты</h2>
+        <!-- <p class="text-secondary mb-4">Карточки проектов: кратко для HR, детали с инженерными решениями — для разработчиков.</p> -->
+
+        <!-- Сетка проектов -->
+        <div class="row g-4">
+            
+            <!-- ПРОЕКТ 1: Стенд калибровки РКИ -->
+            <div class="col-lg-4 col-md-6">
+                <div class="project-card">
+                    <div class="project-header">
+                        <span class="badge-outcome mb-2"><i class="bi bi-check-circle me-1"></i>Успешно внедрён</span>
+                        <div class="project-title">Стенд калибровки модуля контроля изоляции (МКИ) под 1000В</div>
+                        <div class="project-stack">
+                            <span class="tech-tag">STM32F030</span>
+                            <span class="tech-tag">Altium Designer</span>
+                            <span class="tech-tag">Гальваническая развязка</span>
+                            <span class="tech-tag">Python</span>
+                        </div>
+                    </div>
+                    <div class="project-body">
+                        <p class="project-desc">Автоматизированный стенд для калибровки реле контроля изоляции под напряжением 1000В. Полная гальваническая развязка между силовой и цифровой частями.</p>
+                        <div class="project-highlight">
+                            <i class="bi bi-lightning-charge"></i> <strong>Инженерное решение:</strong> Разработана 2-слойная плата с развязкой по питанию и сигналам. Релейная матрица коммутирует нагрузки 90-500 кОм. Протокол координации ПК ⇄ Стенд ⇄ РКИ.
+                        </div>
+                    </div>
+                    <div class="project-footer">
+                        <span class="text-secondary"><i class="bi bi-cpu me-1"></i> Стек: SPL, UART, USB</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="rki.html" class="btn btn-primary">
+                            Подробнее о проекте →
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ПРОЕКТ 2: Стенд прошивки драйверов БПЛА -->
+            <div class="col-lg-4 col-md-6">
+                <div class="project-card">
+                    <div class="project-header">
+                        <span class="badge-outcome mb-2"><i class="bi bi-check-circle me-1"></i>Успешно внедрён</span>
+                        <div class="project-title">Стенд прошивки драйвера моторов БПЛА</div>
+                        <div class="project-stack">
+                            <span class="tech-tag">ATmega328p</span>
+                            <span class="tech-tag">C (регистры)</span>
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">C2 протокол</span>
+                        </div>
+                    </div>
+                    <div class="project-body">
+                        <p class="project-desc">Устройство для автоматической прошивки EFM8 через интерфейс C2. HEX-файл загружается с ПК по COM-порту.</p>
+                        <div class="project-highlight">
+                            <i class="bi bi-hdd-stack"></i> <strong>Инженерное решение:</strong> Программная реализация протокола C2 на Atmega328p. ПО на Python для отправки HEX и управления процессом.
+                        </div>
+                    </div>
+                    <div class="project-footer">
+                        <span class="text-secondary"><i class="bi bi-usb-symbol me-1"></i> Виртуальный COM-порт, bare-metal</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="bpla.html" class="btn btn-primary">
+                            Подробнее о проекте →
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ПРОЕКТ 3: Плата питания РКН -->
+            <div class="col-lg-4 col-md-6">
+                <div class="project-card">
+                    <div class="project-header">
+                        <span class="badge-outcome mb-2"><i class="bi bi-check-circle me-1"></i>Успешно внедрён</span>
+                        <div class="project-title">Модуль питания реле контроля напряжения PHS-1-2M-D-PN-2</div>
+                        <div class="project-stack">
+                            <span class="tech-tag">Altium Designer</span>
+                            <span class="tech-tag">Линейный регулятор напряжения</span>
+                            <span class="tech-tag">Эмиттерный повторитель</span>
+                        </div>
+                    </div>
+                    <div class="project-body">
+                        <p class="project-desc">Устройство линейного понижения напряжения с 600-800 вольт до 170-230 вольт.</p>
+                        <div class="project-highlight">
+                            <i class="bi bi-hdd-stack"></i> <strong>Цель проекта:</strong> Защитное отключение при повышенном напряжении
+                        </div>
+                        <div class="project-highlight">
+                            <i class="bi bi-hdd-stack"></i> <strong>Инженерное решение:</strong> Реализация эмиттерного повторителя на npn транзисторе
+                        </div>
+                    </div>
+                    <div class="project-footer">
+                        <span class="text-secondary"><i class="bi bi-usb-symbol me-1"></i> Эмиттерный повторитель</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="rkn.html" class="btn btn-primary">
+                            Подробнее о проекте →
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ПРОЕКТ 4: RGB-контроллер -->
+            <div class="col-lg-4 col-md-6">
+                <div class="project-card">
+                    <div class="project-header">
+                        <span class="badge-progress mb-2"><i class="bi bi-gear-wide me-1"></i>В разработке</span>
+                        <div class="project-title">RGB-контроллер с микрофоном и Wi-Fi</div>
+                        <div class="project-stack">
+                            <span class="tech-tag">STM32F407</span>
+                            <span class="tech-tag">ESP32</span>
+                            <span class="tech-tag">4-слойная плата</span>
+                            <span class="tech-tag">I2S</span>
+                        </div>
+                    </div>
+                    <div class="project-body">
+                        <p class="project-desc">4-слойная плата для управления адресными лентами (WS2812B, SPI-ленты) со светомузыкой на базе I2S-микрофона.</p>
+                        <div class="project-highlight">
+                            <i class="bi bi-layers"></i> <strong>Инженерное решение:</strong> Разделение цифровых/аналоговых земель, разводка двух МК с высокоскоростными интерфейсами, ESP32 как сервер и для OTA-обновлений.
+                        </div>
+                    </div>
+                    <div class="project-footer">
+                        <span class="text-secondary"><i class="bi bi-wifi me-1"></i> ESP32 + STM32 взаимодействие</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="rgb_controller.html" class="btn btn-primary">
+                            Подробнее о проекте →
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ПРОЕКТ 5: Аренда игрушек -->
+            <div class="col-lg-4 col-md-6">
+                <div class="project-card">
+                    <div class="project-header">
+                        <span class="badge-progress mb-2"><i class="bi bi-gear-wide me-1"></i>В разработке</span>
+                        <div class="project-title">Система аренды игрушек (LTE/GPS)</div>
+                        <div class="project-stack">
+                            <span class="tech-tag">STM32F407</span>
+                            <span class="tech-tag">LTE</span>
+                            <span class="tech-tag">GPS</span>
+                            <span class="tech-tag">4 слоя</span>
+                        </div>
+                    </div>
+                    <div class="project-body">
+                        <p class="project-desc">Подача питания на радиоуправляемую модель после оплаты. Антивандальная система с тревогой, аудио-мониторингом и LTE/GPS модулем расширения.</p>
+                        <div class="project-highlight">
+                            <i class="bi bi-shield-shaded"></i> <strong>Инженерное решение:</strong> Модульная конструкция (основная плата + плата LTE/GPS). Антивандальные цепи: микрофон для анализа, пьезоизлучатель, динамик. Разводка силовых ключей.
+                        </div>
+                    </div>
+                    <div class="project-footer">
+                        <span class="text-secondary"><i class="bi bi-soundwave me-1"></i> Микрофон, динамик, GPS</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="rental_toys.html" class="btn btn-primary">
+                            Подробнее о проекте →
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- ПРОЕКТ 6: Первый крупный -->
+            <div class="col-lg-4 col-md-6">
+                <div class="project-card">
+                    <div class="project-header">
+                        <span class="badge-lesson mb-2"><i class="bi bi-journal-bookmark-fill me-1"></i>Опыт и уроки</span>
+                        <div class="project-title">Устройство плавного пуска (STM32F103, ESP32)</div>
+                        <div class="project-stack">
+                            <span class="tech-tag">STM32F103</span>
+                            <span class="tech-tag">ESP32</span>
+                            <span class="tech-tag">Altium Designer</span>
+                            <span class="tech-tag">Силовая часть на тиристорах</span>
+                            <span class="tech-tag">Трансформаторное управление тиристорами</span>
+                        </div>
+                    </div>
+                    <div class="project-body">
+                        <p class="project-desc">Первая крупная разработка: плата управления двигателем и клапанами для очистного сооружения.</p>
+                        <div class="project-highlight">
+                            <i class="bi bi-exclamation-triangle"></i> <strong>Извлечённый урок:</strong> Проект не запустил двигатель из-за недочётов в расчёте силовой части. Опыт дал понимание важности ЭМС, расчёта пусковых токов и защиты от помех. Клапаны работали, но требовали доработки.
+                        </div>
+                    </div>
+                    <div class="project-footer">
+                        <span class="text-secondary"><i class="bi bi-arrow-repeat me-1"></i> Первый полный цикл → бесценный опыт</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="soft_starter.html" class="btn btn-primary">
+                            Подробнее о проекте →
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+        <!-- Призыв к действию -->
+        <div class="text-center my-5">
+            <p class="fs-5 mb-3">Хотите увидеть схемы, код или обсудить проект?</p>
+            <a href="https://github.com/trifonov-yuriy" class="btn btn-outline-primary-custom btn-lg me-2"><i class="bi bi-github me-2"></i>GitHub</a>
+            <a href="https://t.me/YuriyTrifonov" class="btn btn-outline-primary-custom btn-lg"><i class="bi bi-telegram me-2"></i>Telegram</a>
+        </div>
+
+        <!-- О себе -->
+        <div class="row my-5 pt-4" id="about">
+            <div class="col-md-8">
+                <h2 class="section-title">Обо мне</h2>
+                <p class="lead">Embedded-разработчик с опытом создания устройств «под ключ». Проектирую платы, пишу прошивки и отлаживаю систему до работающего образца.</p>
+                <p>Начинал с AVR и 2-слойных плат, сейчас уверенно работаю с STM32F4, ESP32 и 4-слойными платами в Altium Designer. Разрабатываю не только встраиваемое ПО, но и тулы на Python и C# для автоматизации. Имею опыт с высоким напряжением, гальванической развязкой, нестандартными протоколами (C2) и промышленной периферией Ethernet, ModBus, CAN, USB.</p>
+                <p><strong>Честность и умение учиться на ошибках</strong> — мои принципы. Первый крупный проект не взлетел, но дал понимание реальной инженерии силовых цепей и ЭМС.</p>
+            </div>
+            <div class="col-md-4">
+                <div class="bg-white p-4 rounded-4 shadow-sm mt-4 mt-md-0">
+                    <h5><i class="bi bi-award-fill text-warning me-2"></i>Ключевые компетенции</h5>
+                    <ul class="list-unstyled mt-3">
+                        <li class="mb-2"><i class="bi bi-check-lg text-success me-2"></i>Схемотехника / Altium Designer</li>
+                        <li class="mb-2"><i class="bi bi-check-lg text-success me-2"></i>STM32 (CMSIS, LL, SPL, HAL), AVR (регистры), ESP32(Espressif-IDE, Arduino-IDE)</li>
+                        <li class="mb-2"><i class="bi bi-check-lg text-success me-2"></i>ESP32, FreeRTOS</li>
+                        <li class="mb-2"><i class="bi bi-check-lg text-success me-2"></i>Python (PySerial, PyQt, инструменты)</li>
+                        <li class="mb-2"><i class="bi bi-check-lg text-success me-2"></i>C# (WPF, WinForms, SerialPort)</li>
+                        <li class="mb-2"><i class="bi bi-check-lg text-success me-2"></i>Гальваническая развязка, силовые цепи</li>
+                        <li class="mb-2"><i class="bi bi-check-lg text-success me-2"></i>4-слойные платы, высокоскоростные линии (Ethernet, USB, SDIO, SPI)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Футер -->
+    <footer id="contact">
+        <div class="container text-center">
+            <h3 class="text-white mb-3">Свяжитесь со мной</h3>
+            <div class="footer-links mb-4">
+                <a href="https://github.com/trifonov-yuriy"><i class="bi bi-github me-1"></i> GitHub</a>
+                <a href="https://t.me/YuriyTrifonov"><i class="bi bi-telegram me-1"></i> Telegram</a>
+                <div href=""><i class="bi bi-envelope me-1"></i> trifonov-yuriy2017@mail.ru</div>
+            </div>
+            <p class="text-secondary mb-0">Готов к обсуждению проектов и сотрудничеству</p>
+            <p class="text-secondary mt-3 small">© 2026 Embedded-разработчик. Полный цикл: от платы до прошивки.</p>
+        </div>
+    </footer>
+
+    <!-- Локальный Bootstrap JS -->
+    <script src="js/bootstrap.bundle.min.js"></script>
+
+
+    <!-- Галерея изображений -->
+    <script src="js/gallery.js"></script>
+</body>
+</html>

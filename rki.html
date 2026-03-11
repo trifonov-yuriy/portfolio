@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Стенд калибровки модуля контроля изоляции под 1000В | Портфолио</title>
+    
+    <!-- Подключаем Model Viewer для 3D -->
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+    
+    <!-- Bootstrap Icons (для иконок) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Шапка проекта */
+        .project-header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 60px 0;
+            margin-bottom: 40px;
+        }
+        
+        .project-title {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .project-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        /* Основной контент */
+        .project-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+        
+        /* Секция с 3D моделью */
+        .model-section {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        
+        .model-container {
+            width: 100%;
+            height: 500px;
+            background: #1a1a1a;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        model-viewer {
+            width: 100%;
+            height: 100%;
+            --poster-color: transparent;
+        }
+        
+        /* Характеристики проекта */
+        .specs-section {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .specs-list {
+            list-style: none;
+        }
+        
+        .specs-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+        }
+        
+        .specs-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .spec-icon {
+            width: 24px;
+            margin-right: 12px;
+            color: #4914dc;
+        }
+        
+        /* Описание */
+        .description-section {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .description-section h2 {
+            margin-bottom: 20px;
+            color: #2d3748;
+        }
+        
+        .description-section p {
+            margin-bottom: 15px;
+            color: #4a5568;
+        }
+        
+        .description-section ul {
+            margin-left: 20px;
+            margin-bottom: 20px;
+            color: #4a5568;
+        }
+        
+        .description-section li {
+            margin-bottom: 10px;
+        }
+        
+        /* Галерея изображений */
+        .gallery-section {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .gallery-item {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+        
+        .gallery-item img:hover {
+            transform: scale(1.05);
+        }
+        
+        /* Кнопка возврата */
+        .back-link {
+            display: inline-block;
+            margin: 20px 0;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            opacity: 0.9;
+        }
+        
+        .back-link:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+        
+        /* Схема подключения */
+        .schematic-section {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .schematic-image {
+            width: 100%;
+            max-width: 800px;
+            margin: 20px auto;
+            display: block;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        
+        /* Кнопки */
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn-primary {
+            background: #dc143c;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #b22222;
+        }
+        
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+        
+        .tag {
+            background: #e9ecef;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: #495057;
+            display: inline-block;
+        }
+        
+        /* Специфичные стили для высоковольтного проекта */
+        .warning-badge {
+            background: #fff3cd;
+            border-left: 4px solid #dc143c;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            color: #856404;
+        }
+        
+        .voltage-badge {
+            background: #dc143c;
+            color: white;
+            padding: 3px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            display: inline-block;
+            font-weight: bold;
+        }
+        
+        .isolation-diagram {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        
+        .isolation-block {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+            min-width: 200px;
+        }
+        
+        .isolation-block.high-voltage {
+            border: 2px solid #dc143c;
+        }
+        
+        .isolation-block.low-voltage {
+            border: 2px solid #2a5298;
+        }
+        
+        .isolation-line {
+            display: flex;
+            align-items: center;
+            color: #666;
+        }
+        
+        .isolation-gap {
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, #dc143c, #2a5298);
+            margin: 10px 0;
+        }
+        
+        .feature-highlight {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .feature-highlight h4 {
+            color: #dc143c;
+            margin-bottom: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .project-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .project-title {
+                font-size: 2rem;
+            }
+            
+            .model-container {
+                height: 350px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка проекта -->
+    <header class="project-header">
+        <div class="container">
+            <a href="index.html" class="back-link">← Назад к проектам</a>
+            <h1 class="project-title">Стенд калибровки МКИ под 1000В</h1>
+            <p class="project-subtitle">Автоматизированный высоковольтный стенд для калибровки модуля контроля изоляции</p>
+        </div>
+    </header>
+    
+    <main class="container">
+        <!-- Блок с 3D моделью и характеристиками -->
+        <div class="project-content">
+            <!-- Левая колонка: 3D модель -->
+            <div>
+                <div class="model-section">
+                    <h2>3D-модель платы стенда</h2>
+                    <div class="model-container">
+                        <!-- Здесь ваш .glb файл -->
+                        <model-viewer 
+                            src="3d/rki_.glb"
+                            alt="3D модель платы стенда калибровки МКИ"
+                            auto-rotate
+                            camera-controls
+                            ar-status="not-presenting"
+                            shadow-intensity="1"
+                            exposure="1"
+                            environment-image="neutral"
+                            style="width:100%; height:100%;">
+                        </model-viewer>
+                    </div>
+                    <p style="margin-top: 10px; color: #666; font-size: 0.9rem;">
+                        👆 Вращайте мышкой, чтобы рассмотреть плату со всех сторон
+                    </p>
+                </div>
+                
+                <!-- Описание проекта -->
+                <div class="description-section">
+                    <h2>О проекте</h2>
+                    <p>
+                        Автоматизированный стенд для калибровки модуля контроля изоляции (МКИ) 
+                        под напряжением 1000 вольт. Проект полностью автоматизирует процесс 
+                        высоковольтной калибровки, делая его безопасным и повторяемым.
+                    </p>
+                    
+                    <div class="warning-badge">
+                        <strong>⚡ Ключевая особенность:</strong> Полная гальваническая развязка между 
+                        высоковольтной частью (1000В) и низковольтной (STM32, USB). Питание STM32 и 
+                        нагрузка 1000В гальванически развязаны.
+                    
+                    </div>
+                    
+                    <!-- <h3>Как это работает</h3>
+                    <div class="isolation-diagram">
+                        <div class="isolation-block low-voltage">
+                            <i class="bi bi-cpu" style="font-size: 2rem; color: #2a5298;"></i>
+                            <h4>Низковольтная часть</h4>
+                            <p>STM32F030<br>USB / 5V</p>
+                        </div>
+                        
+                        <div class="isolation-line">
+                            <div class="isolation-gap"></div>
+                            <span>Гальваническая<br>развязка</span>
+                            <div class="isolation-gap"></div>
+                        </div>
+                        
+                        <div class="isolation-block high-voltage">
+                            <i class="bi bi-lightning-charge" style="font-size: 2rem; color: #dc143c;"></i>
+                            <h4>Высоковольтная часть</h4>
+                            <p>1000В<br>Нагрузочные резисторы</p>
+                        </div>
+                    </div> -->
+                    
+                    <h3>Принцип работы</h3>
+                    <ol style="margin-left: 20px; color: #4a5568;">
+                        <li>ПК по COM-порту отправляет команду МКИ на вход в режим калибровки</li>
+                        <li>ПК сообщает плате стенда, какую нагрузку подключить (90кΩ, 100кΩ, 150кΩ, 300кΩ, 400кΩ, 500кΩ)</li>
+                        <li>Стенд коммутирует нужную нагрузку через релейную матрицу</li>
+                        <li>Выполняется калибровка под напряжением 1000В</li>
+                        <li>Результаты отправляются на ПК</li>
+                    </ol>
+                    
+                    <div class="feature-highlight">
+                        <h4>🔬 Инженерные решения</h4>
+                        <ul>
+                            <li>Гальваническая развязка по питанию (DC-DC изоляция)</li>
+                            <li>Развязка сигналов управления (оптроны / цифровые изоляторы)</li>
+                            <li>Высоковольтные зазоры и усиленная изоляция на PCB</li>
+                            <li>Релейная матрица для коммутации нагрузок 90-500 кОм</li>
+                            <li>Два независимых COM-порта: для МКИ и для стенда</li>
+                            <li>Для коммутации нагрузок вместо обычных реле используются оптореле CPC1035N</li>
+                        </ul>
+                    </div>
+                    
+                    <h3>Результат</h3>
+                    <p>
+                        <span style="background: #28a745; color: white; padding: 3px 10px; border-radius: 20px; font-size: 0.9rem;">
+                            ✅ Успешно внедрён
+                        </span>
+                    </p>
+                    <p>
+                        Стенд успешно эксплуатируется, позволив полностью автоматизировать 
+                        и обезопасить процесс высоковольтной калибровки. Время калибровки 
+                        сократилось в 5 раз, исключен человеческий фактор при работе с 
+                        высоким напряжением.
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Правая колонка: Характеристики -->
+            <div>
+                <div class="specs-section">
+                    <h2>Характеристики</h2>
+                    <ul class="specs-list">
+                        <li>
+                            <span class="spec-icon">🔹</span>
+                            <strong>Микроконтроллер:</strong> STM32F030
+                        </li>
+                        <li>
+                            <span class="spec-icon">🔹</span>
+                            <strong>Интерфейс с ПК:</strong> Виртуальный COM-порт (USB CDC)
+                        </li>
+                        <li>
+                            <span class="spec-icon">🔹</span>
+                            <strong>Напряжение калибровки:</strong> 1000V DC
+                        </li>
+                        <li>
+                            <span class="spec-icon">🔹</span>
+                            <strong>Набор нагрузок:</strong> 90кΩ, 100кΩ, 150кΩ, 300кΩ, 400кΩ, 500кΩ
+                        </li>
+                        <li>
+                            <span class="spec-icon">🔹</span>
+                            <strong>Коммутация:</strong> Релейная матрица
+                        </li>
+                        <li>
+                            <span class="spec-icon">🔹</span>
+                            <strong>Гальваническая развязка:</strong> Питание + сигналы
+                        </li>
+                        <li>
+                            <span class="spec-icon">🔹</span>
+                            <strong>Тип развязки:</strong> DC-DC преобразователь + оптроны
+                        </li>
+                        <li>
+                            <span class="spec-icon">🔹</span>
+                            <strong>Питание низковольтной части:</strong> 5V USB
+                        </li>
+                        <li>
+                            <span class="spec-icon">🔹</span>
+                            <strong>Размер платы:</strong> 120mm × 100mm
+                        </li>
+                        <li>
+                            <span class="spec-icon">🔹</span>
+                            <strong>Количество слоев:</strong> 2
+                        </li>
+                    </ul>
+                    
+                    <div style="margin-top: 25px;">
+                        <h3>Технологии</h3>
+                        <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 15px;">
+                            <span class="tag">STM32F030</span>
+                            <span class="tag">Altium Designer</span>
+                            <span class="tag">SPL</span>
+                            <span class="tag">Python</span>
+                            <span class="tag">UART</span>
+                            <span class="tag">USB-UART переходник на плате</span>
+                            <span class="tag">Гальваническая развязка</span>
+                            <span class="tag">Высокое напряжение</span>
+                            <span class="tag">Релейная матрица</span>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-top: 30px;">
+                        <a href="https://github.com/trifonov-yuriy/rki_cal" class="btn btn-primary" style="width: 100%; text-align: center;" target="_blank">
+                            <i class="bi bi-github"></i> Исходный код на GitHub
+                        </a>
+                    </div>
+                    
+                    <div style="margin-top: 20px; background: #f8f9fa; padding: 20px; border-radius: 8px;">
+                        <h4 style="margin-bottom: 10px;">⚡ Высоковольтные нагрузки:</h4>
+                        <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                            <span style="background: #e9ecef; padding: 5px 12px; border-radius: 20px;">90 кОм</span>
+                            <span style="background: #e9ecef; padding: 5px 12px; border-radius: 20px;">100 кОм</span>
+                            <span style="background: #e9ecef; padding: 5px 12px; border-radius: 20px;">150 кОм</span>
+                            <span style="background: #e9ecef; padding: 5px 12px; border-radius: 20px;">300 кОм</span>
+                            <span style="background: #e9ecef; padding: 5px 12px; border-radius: 20px;">400 кОм</span>
+                            <span style="background: #e9ecef; padding: 5px 12px; border-radius: 20px;">500 кОм</span>
+                        </div>
+                        <p style="margin-top: 15px; font-size: 0.9rem; color: #666;">
+                            <i class="bi bi-exclamation-triangle"></i> Все резисторы рассчитаны на работу под напряжением 1000В
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Секция с архитектурой -->
+        <div class="gallery-section">
+            <h2>Архитектура системы</h2>
+            <div style="text-align: center; margin: 30px 0;">
+                <div style="display: inline-block; background: #e9ecef; padding: 40px; border-radius: 12px; width: 100%;">
+                    <div style="display: flex; gap: 20px; align-items: center; flex-wrap: wrap; justify-content: center;">
+                        <div style="background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); min-width: 150px;">
+                            <i class="bi bi-pc" style="font-size: 3rem; color: #6c757d;"></i>
+                            <h4>ПК</h4>
+                            <p style="font-size: 0.9rem;">Python GUI</p>
+                        </div>
+                        <i class="bi bi-arrow-right" style="font-size: 2rem; color: #6c757d;"></i>
+                        
+                        <div style="background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); min-width: 150px;">
+                            <i class="bi bi-hdd-stack" style="font-size: 3rem; color: #2a5298;"></i>
+                            <h4>Стенд МКИ-Ка</h4>
+                            <p style="font-size: 0.9rem;">STM32F030</p>
+                        </div>
+                        <i class="bi bi-arrow-right" style="font-size: 2rem; color: #6c757d;"></i>
+                        
+                        <div style="background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); min-width: 150px; border: 2px solid #dc143c;">
+                            <i class="bi bi-lightning-charge" style="font-size: 3rem; color: #dc143c;"></i>
+                            <h4>Высоковольтная часть</h4>
+                            <p style="font-size: 0.9rem;">1000V нагрузки</p>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-top: 30px; display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+                        <div style="background: #fff3cd; padding: 10px 20px; border-radius: 30px;">
+                            <i class="bi bi-usb-symbol"></i> COM-port (МКИ)
+                        </div>
+                        <div style="background: #d1ecf1; padding: 10px 20px; border-radius: 30px;">
+                            <i class="bi bi-usb-symbol"></i> COM-port (Стенд)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p style="text-align: center; color: #666;">
+                ПК управляет двумя устройствами через независимые виртуальные COM-порты
+            </p>
+        </div>
+        
+        <!-- Секция с гальванической развязкой -->
+        <div class="schematic-section">
+            <h2>Гальваническая развязка</h2>
+            <div style="display: flex; gap: 30px; justify-content: center; margin: 30px 0; flex-wrap: wrap;">
+                <div style="text-align: center;">
+                    <div style="background: #e9ecef; width: 200px; height: 100px; display: flex; align-items: center; justify-content: center; border-radius: 8px;">
+                        <span style="font-weight: bold;">STM32 / USB<br>5V</span>
+                    </div>
+                    <p>Низковольтная сторона</p>
+                </div>
+                
+                <div style="text-align: center;">
+                    <div style="background: #333; color: white; width: 60px; height: 100px; display: flex; align-items: center; justify-content: center; border-radius: 8px; writing-mode: vertical-rl; transform: rotate(180deg);">
+                        ⚡ ИЗОЛЯЦИЯ ⚡
+                    </div>
+                </div>
+                
+                <div style="text-align: center;">
+                    <div style="background: #dc143c; color: white; width: 200px; height: 100px; display: flex; align-items: center; justify-content: center; border-radius: 8px;">
+                        <span style="font-weight: bold;">Нагрузки 1000V<br>90-500 кОм</span>
+                    </div>
+                    <p>Высоковольтная сторона</p>
+                </div>
+            </div>
+            
+            <div style="background: #f8f9fa; padding: 20px; border-radius: 8px;">
+                <h4>Типы развязки:</h4>
+                <ul style="margin-top: 10px;">
+                    <li><strong>По питанию:</strong> изолированный DC-DC преобразователь</li>
+                    <li><strong>По сигналам:</strong> оптроны / цифровые изоляторы с усиленной изоляцией</li>
+                    <li><strong>Топология PCB:</strong> увеличенные зазоры (creepage/clearance) для 1000В</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Галерея фото -->
+        <div class="gallery-section">
+            <h2>Проектирование в Altium Designer</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="images/rki_e3.png" alt="Принципиальная схема" onclick="openModal(this)" style="cursor: pointer;">
+                    <div style="padding: 10px; text-align: center;">Принципиальная схема</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/rki_general.png" alt="PCB все слои" onclick="openModal(this)" style="cursor: pointer;">
+                    <div style="padding: 10px; text-align: center;">PCB</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/rki_top.png" alt="PCB верхний слой" onclick="openModal(this)" style="cursor: pointer;">
+                    <div style="padding: 10px; text-align: center;">PCB (верхний слой)</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/rki_bottom.png" alt="PCB нижний слой" onclick="openModal(this)" style="cursor: pointer;">
+                    <div style="padding: 10px; text-align: center;">PCB (нижний слой)</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Кнопка возврата -->
+        <div style="text-align: center; margin: 40px 0;">
+            <a href="index.html" class="btn btn-secondary">← Вернуться ко всем проектам</a>
+        </div>
+    </main>
+    
+    <footer style="background: #333; color: white; padding: 30px 0; margin-top: 60px;">
+        <div class="container">
+            <p style="text-align: center;">© 2026 Мое портфолио embedded-разработчика</p>
+        </div>
+    </footer>
+    <!-- Галерея изображений -->
+    <script src="js/gallery.js"></script>
+</body>
+</html>

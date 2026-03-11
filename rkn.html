@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Модуль питания реле контроля напряжения PHS-1-2M-D-PN-2 | Портфолио</title>
+    
+    <!-- Подключаем Model Viewer для 3D -->
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+    
+    <!-- Bootstrap Icons (для иконок) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Шапка проекта */
+        .project-header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 60px 0;
+            margin-bottom: 40px;
+        }
+        
+        .project-title {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .project-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        /* Основной контент */
+        .project-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+        
+        /* Секция с 3D моделью */
+        .model-section {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        
+        .model-container {
+            width: 100%;
+            height: 500px;
+            background: #1a1a1a;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        model-viewer {
+            width: 100%;
+            height: 100%;
+            --poster-color: transparent;
+        }
+        
+        /* Характеристики проекта */
+        .specs-section {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .specs-list {
+            list-style: none;
+        }
+        
+        .specs-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+        }
+        
+        .specs-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .spec-icon {
+            width: 24px;
+            margin-right: 12px;
+            color: #2a5298;
+        }
+        
+        /* Описание */
+        .description-section {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .description-section h2 {
+            margin-bottom: 20px;
+            color: #2d3748;
+        }
+        
+        .description-section p {
+            margin-bottom: 15px;
+            color: #4a5568;
+        }
+        
+        .description-section ul {
+            margin-left: 20px;
+            margin-bottom: 20px;
+            color: #4a5568;
+        }
+        
+        .description-section li {
+            margin-bottom: 10px;
+        }
+        
+        /* Галерея изображений */
+        .gallery-section {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .gallery-item {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+        
+        .gallery-item img:hover {
+            transform: scale(1.05);
+        }
+        
+        /* Кнопка возврата */
+        .back-link {
+            display: inline-block;
+            margin: 20px 0;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            opacity: 0.9;
+        }
+        
+        .back-link:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+        
+        /* Схема подключения */
+        .schematic-section {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .schematic-image {
+            width: 100%;
+            max-width: 800px;
+            margin: 20px auto;
+            display: block;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        
+        /* Кнопки */
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn-primary {
+            background: #2a5298;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #1e3c72;
+        }
+        
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+        
+        .tag {
+            background: #e9ecef;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: #495057;
+            display: inline-block;
+        }
+        
+        /* Модульная структура */
+        .modular-badge {
+            background: #e3f2fd;
+            border-left: 4px solid #2a5298;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .feature-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .feature-item i {
+            font-size: 2rem;
+            color: #2a5298;
+            margin-bottom: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .project-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .project-title {
+                font-size: 2rem;
+            }
+            
+            .model-container {
+                height: 350px;
+            }
+            
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка проекта -->
+    <header class="project-header">
+        <div class="container">
+            <a href="index.html" class="back-link">← Назад к проектам</a>
+            <h1 class="project-title">Модуль питания реле контроля напряжения</h1>
+            <p class="project-subtitle">Устройство подачи питания на реле контроля напряжения PHS-1-2M-D-PN-2 с целью обеспечения защиты от повышенного напряжения</p>
+        </div>
+    </header>
+    
+    <main class="container">
+        <!-- Блок с 3D моделью и характеристиками -->
+        <div class="project-content">
+            <!-- Левая колонка: 3D модель -->
+            <div>
+                <div class="model-section">
+                    <h2>3D-модель основной платы</h2>
+                    <div class="model-container">
+                        <!-- Здесь ваш .glb файл -->
+                        <model-viewer 
+                            src="3d/rkn.glb"
+                            alt="3D модель основной платы"
+                            auto-rotate
+                            camera-controls
+                            ar-status="not-presenting"
+                            shadow-intensity="1"
+                            exposure="1"
+                            environment-image="neutral"
+                            style="width:100%; height:100%;">
+                        </model-viewer>
+                    </div>
+                    <p style="margin-top: 10px; color: #666; font-size: 0.9rem;">
+                        👆 Вращайте мышкой, чтобы рассмотреть плату со всех сторон
+                    </p>
+                </div>
+                <div class="model-section">
+                    <h2>3D-модель основной платы в корпусе 141 "Меандр"</h2>
+                    <div class="model-container">
+                        <!-- Здесь ваш .glb файл -->
+                        <model-viewer 
+                            src="3d/rkn_korpus.glb"
+                            alt="3D модель основной платы в корпусе 141 Меандр"
+                            auto-rotate
+                            camera-controls
+                            ar-status="not-presenting"
+                            shadow-intensity="1"
+                            exposure="1"
+                            environment-image="neutral"
+                            style="width:100%; height:100%;">
+                        </model-viewer>
+                    </div>
+                    <p style="margin-top: 10px; color: #666; font-size: 0.9rem;">
+                        👆 Вращайте мышкой, чтобы рассмотреть плату со всех сторон
+                    </p>
+                </div>
+                
+                <!-- Описание проекта -->
+                <div class="description-section">
+                    <h2>О проекте</h2>
+                    <h3>Часть системы защиты зарядной станции электромобилей от повышенного напряжения. </h3>
+                    <p>
+                        Максимальное напряжение, выдаваемое зарядной станцией на электромобиль, составляет 800 вольт. 
+                        В проекте была поставлена задача предусмотреть защиту в случае, если напряжение превысит 800 вольт.
+                        В качестве элементов системы защиты были выбраны:
+                    </p>
+                    <p>
+                        1. Автоматический выключатель  4P SL7N-63 suntree.
+                    </p>
+                    <p>
+                        2. Независимый расцепитель SL7N MX+OF suntree
+                    </p>
+                    <p>
+                        3. Реле контроля напряжения PHS-1-2M-D-PN-2
+                    </p>
+                    <p>
+                        При превышении превышении напряжения выше 800 вольт, например 850 вольт. Модуль питания реле контроля напряжения понижает 850 вольт 
+                        до (850 / 3.5) = 243 В.
+                    </p>
+                    <p>
+                        Реле контроля напряжения "видит", что напряжение поднялось выше (800 / 3,5) = 230 вольт. И размыкает цепь питания всей станции.
+                    </p>
+                    
+                    
+                    
+                    <h3>Состояние проекта</h3>
+                    <p>
+                        <span class="badge-outcome mb-2"><i class="bi bi-check-circle me-1"></i>Успешно внедрён</span>
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Правая колонка: Характеристики -->
+            <div>
+                <div class="specs-section">
+                    <h2>Характеристики</h2>
+                    <ul class="specs-list">
+                        <li>
+                            <span class="spec-icon">🔹</span>
+                            <strong>Размер платы:</strong> 82mm × 46mm
+                        </li>
+                        <li>
+                            <span class="spec-icon">🔹</span>
+                            <strong>Количество слоев:</strong> 2
+                        </li>
+            
+                    </ul>
+                    
+                    <div style="margin-top: 25px;">
+                        <h3>Технологии</h3>
+                        <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 15px;">
+                            <span class="tag">Altium Designer</span>
+                            <span class="tag">2-слойная плата</span>
+                        </div>
+                    </div>
+                    
+                    <!-- <div style="margin-top: 30px;">
+                        <a href="https://github.com/yourusername/rental-system" class="btn btn-primary" style="width: 100%; text-align: center;" target="_blank">
+                            <i class="bi bi-github"></i> Исходный код на GitHub
+                        </a>
+                    </div> -->
+                    
+                </div>
+            </div>
+        </div>
+        
+        
+        <!-- Галерея фото (плейсхолдеры) -->
+        <div class="gallery-section">
+            <h2>Проектирование в Altium Designer</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="images/rkn_general.png" alt="Основная плата сверху" onclick="openModal(this)" style="cursor: pointer;">
+                    <div style="padding: 10px; text-align: center;">Плата</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/rkn_top.png" alt="Основная плата сверху" onclick="openModal(this)" style="cursor: pointer;">
+                    <div style="padding: 10px; text-align: center;">верхний слой</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/rkn_bottom.png" alt="Плата нижний слой" onclick="openModal(this)" style="cursor: pointer;">
+                    <div style="padding: 10px; text-align: center;">нижний слой</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/rkn_image_1.png" alt="Чертеж_1" onclick="openModal(this)" style="cursor: pointer;">
+                    <div style="padding: 10px; text-align: center;">Принципиальная схема Э3</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/rkn_image_2.png" alt="Чертеж_2" onclick="openModal(this)" style="cursor: pointer;">
+                    <div style="padding: 10px; text-align: center;">Схема подключений Э4</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Кнопка возврата -->
+        <div style="text-align: center; margin: 40px 0;">
+            <a href="index.html" class="btn btn-secondary">← Вернуться ко всем проектам</a>
+        </div>
+    </main>
+    
+    <footer style="background: #333; color: white; padding: 30px 0; margin-top: 60px;">
+        <div class="container">
+            <p style="text-align: center;">© 2026 Мое портфолио embedded-разработчика</p>
+        </div>
+    </footer>
+    <!-- Галерея изображений -->
+    <script src="js/gallery.js"></script>
+</body>
+</html>

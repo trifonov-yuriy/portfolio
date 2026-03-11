@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Устройство плавного пуска электродвигателя | Портфолио</title>
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+    <!-- Подсветка синтаксиса -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/c.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Шапка проекта */
+        .project-header {
+            background: linear-gradient(135deg, #b91c1c 0%, #7f1d1d 100%);
+            color: white;
+            padding: 60px 0;
+            margin-bottom: 40px;
+        }
+        
+        .project-title {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .project-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        /* Основной контент */
+        .project-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+        
+        /* Информационные блоки */
+        .info-section {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .info-section h2 {
+            margin-bottom: 20px;
+            color: #2d3748;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .info-section h2 i {
+            color: #b91c1c;
+            font-size: 1.8rem;
+        }
+        
+        /* Характеристики */
+        .specs-section {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 20px;
+        }
+        
+        .specs-list {
+            list-style: none;
+        }
+        
+        .specs-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+        }
+        
+        .specs-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .spec-icon {
+            width: 24px;
+            margin-right: 12px;
+            color: #b91c1c;
+        }
+        
+        /* Секция с кодом */
+        .code-section {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .code-block {
+            margin: 20px 0;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #e9ecef;
+        }
+        
+        .code-block pre {
+            margin: 0;
+            padding: 20px;
+            background: #1e1e1e;
+            color: #d4d4d4;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            overflow-x: auto;
+        }
+        
+        .code-caption {
+            background: #f8f9fa;
+            padding: 12px 20px;
+            font-size: 0.95rem;
+            color: #495057;
+            border-top: 1px solid #e9ecef;
+        }
+        
+        .code-caption i {
+            color: #b91c1c;
+            margin-right: 8px;
+        }
+        
+        /* Галерея */
+        .gallery-section {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 25px 0;
+        }
+        
+        .gallery-item {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            background: #f8f9fa;
+            transition: transform 0.3s;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            cursor: pointer;
+            border-bottom: 1px solid #dee2e6;
+        }
+        
+        .gallery-item .caption {
+            padding: 12px;
+            text-align: center;
+            font-size: 0.95rem;
+            color: #495057;
+            background: white;
+        }
+        
+        /* Архитектура */
+        .arch-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .arch-card {
+            background: #f8f9fa;
+            padding: 25px 20px;
+            border-radius: 8px;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+        }
+        
+        .arch-card:hover {
+            border-color: #b91c1c;
+            transform: translateY(-3px);
+        }
+        
+        .arch-card i {
+            font-size: 2.5rem;
+            color: #b91c1c;
+            margin-bottom: 15px;
+        }
+        
+        .arch-card h4 {
+            margin-bottom: 10px;
+            color: #2d3748;
+        }
+        
+        .arch-card p {
+            color: #6c757d;
+            font-size: 0.95rem;
+        }
+        
+        /* Блок с выводами */
+        .lessons-section {
+            background: #fff3cd;
+            border-left: 4px solid #b91c1c;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 30px 0;
+        }
+        
+        .lessons-section h3 {
+            color: #856404;
+            margin-bottom: 15px;
+        }
+        
+        .lessons-section ul {
+            margin-left: 20px;
+            color: #856404;
+        }
+        
+        .lessons-section li {
+            margin-bottom: 10px;
+        }
+        
+        .tag {
+            background: #e9ecef;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: #495057;
+            display: inline-block;
+            margin: 0 5px 5px 0;
+        }
+        
+        .tag.primary {
+            background: #b91c1c;
+            color: white;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #b91c1c;
+        }
+        
+        .stat-label {
+            color: #6c757d;
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background: #b91c1c;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #7f1d1d;
+        }
+        
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+        
+        .back-link {
+            display: inline-block;
+            margin: 20px 0;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            opacity: 0.9;
+        }
+        
+        .back-link:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            .project-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .project-title {
+                font-size: 2rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .gallery-item img {
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка проекта -->
+    <header class="project-header">
+        <div class="container">
+            <a href="index.html" class="back-link">← Назад к проектам</a>
+            <h1 class="project-title">Устройство плавного пуска электродвигателя</h1>
+            <p class="project-subtitle">Первый крупный проект: управление двигателем и клапанами для очистного сооружения</p>
+        </div>
+    </header>
+    
+    <main class="container">
+        <!-- Блок с описанием и характеристиками -->
+        <div class="project-content">
+            <!-- Левая колонка - описание -->
+            <div>
+                <div class="info-section">
+                    <h2><i class="bi bi-info-circle"></i> О проекте</h2>
+                    <p>
+                        <span style="background: #b91c1c; color: white; padding: 3px 10px; border-radius: 20px; font-size: 0.9rem; display: inline-block; margin-bottom: 15px;">
+                            ⚠️ Первый крупный проект
+                        </span>
+                    </p>
+                    <p>
+                        Это мой первый серьёзный проект "под ключ": разработка единой платы управления 
+                        для очистного сооружения, включающей силовую часть для плавного пуска 
+                        электродвигателя и управление 8 соленоидными клапанами.
+                    </p>
+                    <p>
+                        <strong>Статус:</strong> Проект доведён до стадии первого образца, но двигатель 
+                        не запустился, а клапаны работали с ложными срабатываниями. Заказчик прекратил 
+                        сотрудничество, но работа была безвозмездной — я предупреждал, что это мой первый 
+                        опыт.
+                    </p>
+                    
+                    <div class="lessons-section">
+                        <h3><i class="bi bi-journal-bookmark-fill"></i> Извлечённые уроки</h3>
+                        <ul>
+                            <li><strong>Силовая часть требует тщательного расчёта</strong> — пусковые токи, индуктивность нагрузки, снабберные цепи</li>
+                            <li><strong>ЭМС — критически важна</strong> — без правильной развязки и фильтрации ложные срабатывания неизбежны</li>
+                            <li><strong>Защита от дребезга</strong> — аппаратная и программная, особенно для кнопок в промышленной среде</li>
+                            <li><strong>Детекторы нуля</strong> — требуют тщательной настройки и защиты от помех</li>
+                            <li><strong>Параметры запуска</strong> — должны быть калибруемыми под конкретный двигатель</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="info-section">
+                    <h2><i class="bi bi-diagram-3"></i> Архитектура системы</h2>
+                    <div class="arch-grid">
+                        <div class="arch-card">
+                            <i class="bi bi-cpu"></i>
+                            <h4>STM32F103</h4>
+                            <p>Основной контроллер</p>
+                            <span class="tag">FreeRTOS</span>
+                            <span class="tag">SPL</span>
+                        </div>
+                        <div class="arch-card">
+                            <i class="bi bi-lightning-charge"></i>
+                            <h4>Силовая часть</h4>
+                            <p>Тиристорный регулятор</p>
+                            <span class="tag">Фазовое управление</span>
+                            <span class="tag">PWM</span>
+                        </div>
+                        <div class="arch-card">
+                            <i class="bi bi-valve"></i>
+                            <h4>Клапаны (8 шт)</h4>
+                            <p>Соленоидные клапаны</p>
+                            <span class="tag">GPIO</span>
+                            <span class="tag">Защита от помех</span>
+                        </div>
+                        <div class="arch-card">
+                            <i class="bi bi-hdd"></i>
+                            <h4>HMI</h4>
+                            <p>UART + DMA</p>
+                            <span class="tag">CRC8</span>
+                            <span class="tag">Протокол</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Статистика проекта -->
+                <div class="info-section">
+                    <h2><i class="bi bi-bar-chart"></i> Цифры</h2>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-value">8</div>
+                            <div class="stat-label">управляемых клапанов</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">5+</div>
+                            <div class="stat-label">задач FreeRTOS</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">3</div>
+                            <div class="stat-label">детектора нуля</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Правая колонка - характеристики -->
+            <div>
+                <div class="specs-section">
+                    <h2>Характеристики</h2>
+                    <ul class="specs-list">
+                        <li>
+                            <span class="spec-icon">🔹</span>
+                            <strong>Микроконтроллер:</strong> STM32F103C8T6
+                        </li>
+                        <li>
+                            <span class="spec-icon">🔹</span>
+                            <strong>ОСРВ:</strong> FreeRTOS
+                        </li>
+                        <li>
+                            <span class="spec-icon">🔹</span>
+                            <strong>Интерфейсы:</strong> UART + DMA, I2C, GPIO, EXTI
+                        </li>
+                        <li>
+                            <span class="spec-icon">🔹</span>
+                            <strong>Управление двигателем:</strong> Фазовое регулирование, детекторы нуля
+                        </li>
+                        <li>
+                            <span class="spec-icon">🔹</span>
+                            <strong>Управление клапанами:</strong> 8 каналов, импульсный режим
+                        </li>
+                        <li>
+                            <span class="spec-icon">🔹</span>
+                            <strong>Измерения:</strong> ADC (ток), I2C (давление/температура)
+                        </li>
+                        <li>
+                            <span class="spec-icon">🔹</span>
+                            <strong>Защита:</strong> IWDG, контроль тока, аварийные состояния
+                        </li>
+                        <li>
+                            <span class="spec-icon">🔹</span>
+                            <strong>Память:</strong> Flash для хранения параметров
+                        </li>
+                    </ul>
+                    
+                    <div style="margin-top: 25px; background: #fff3cd; padding: 15px; border-radius: 8px;">
+                        <i class="bi bi-exclamation-triangle" style="color: #856404;"></i>
+                        <strong>Важно:</strong> Проект не был завершён коммерчески, но дал бесценный опыт работы с силовой частью, ЭМС и промышленной автоматикой.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ГАЛЕРЕЯ ИЗОБРАЖЕНИЙ -->
+        <div class="gallery-section">
+            <h2><i class="bi bi-image"></i> Фото устройства</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="images/soft_starter_1.png" 
+                         alt="Плата устройства плавного пуска - вид сверху" 
+                         onclick="openModal(this)"
+                         style="cursor: pointer;">
+                    <div class="caption">Плата управления. Общий вид</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/soft_starter_2.png" 
+                         alt="Плата устройства плавного пуска - вид снизу" 
+                         onclick="openModal(this)"
+                         style="cursor: pointer;">
+                    <div class="caption">Плата управления. Элементы на плате</div>
+                </div>
+            </div>
+            <p style="text-align: center; color: #666; margin-top: 15px;">
+                <i class="bi bi-zoom-in"></i> Кликните на любое изображение для увеличения
+            </p>
+        </div>
+        <div style="margin-top: 30px;">
+            <a href="https://github.com/trifonov-yuriy/soft_starter" class="btn btn-primary" style="width: 100%; text-align: center;" target="_blank">
+                <i class="bi bi-github"></i> Исходный код на GitHub
+            </a>
+        </div>
+        <!-- КОД: Алгоритм плавного пуска -->
+        <div class="code-section">
+            <h2><i class="bi bi-graph-up"></i> 1. Алгоритм плавного пуска</h2>
+            <p>
+                Управление углом открытия тиристоров в зависимости от фазы и состояния двигателя.
+            </p>
+            
+            <div class="code-block">
+                <pre><code class="language-c">// engineControl.c - обработка пересечения фаз
+void PhaseCrossing1_Happened(EngineControlTypeDef *engineControlTypeDef)
+{
+    static uint16_t openingAngleValue = 0;
+    static uint16_t CountDownCounter = VALUE_SAMPLES_COUNTER;
+    
+    switch(engineControlTypeDef->Engine_State)
+    {
+        case EngineStarting: 
+        {
+            if(engineControlTypeDef->OpeningAngle > FINISH_OPENGING_ANGLE)
+            {
+                openingAngleValue++;
+                if(openingAngleValue >= engineControlTypeDef->StartingTime)
+                {
+                    // Плавное уменьшение угла открытия
+                    engineControlTypeDef->OpeningAngle = 
+                        engineControlTypeDef->OpeningAngle - 
+                        (engineControlTypeDef->OpeningAngle / CountDownCounter);
+                    
+                    openingAngleValue = 0;
+                    if(CountDownCounter > 0) CountDownCounter--;
+                }
+            }
+            else
+            {
+                engineControlTypeDef->Engine_State = EngineStarted;
+            }
+        } break;
+        
+        case EngineStopping: 
+        {
+            if(engineControlTypeDef->OpeningAngle < STARTING_OPENING_ANGLE)
+            {
+                openingAngleValue++;
+                if(openingAngleValue >= engineControlTypeDef->StoppingTime)
+                {
+                    // Плавное увеличение угла открытия (торможение)
+                    engineControlTypeDef->OpeningAngle = 
+                        engineControlTypeDef->OpeningAngle + 
+                        ((180 - engineControlTypeDef->OpeningAngle) / CountDownCounter);
+                    
+                    openingAngleValue = 0;
+                    if(CountDownCounter > 0) CountDownCounter--;
+                }
+            }
+        } break;
+    }
+}</code></pre>
+                <div class="code-caption">
+                    <i class="bi bi-lightbulb"></i>
+                    Угол открытия изменяется плавно с заданным временем запуска/остановки
+                </div>
+            </div>
+        </div>
+
+        <!-- КОД: Детекторы нуля и прерывания -->
+        <div class="code-section">
+            <h2><i class="bi bi-activity"></i> 2. Детекторы нуля и борьба с помехами</h2>
+            <p>
+                Прерывания по пересечению нуля с защитой от повторного срабатывания.
+            </p>
+            
+            <div class="code-block">
+                <pre><code class="language-c">// engineControl.c - обработчики EXTI
+void EXTI1_IRQHandler()
+{
+    if(GPIO_ReadInputDataBit(GPIOA, ZERO_DETECTOR_1) == 0)
+    {
+        engineControl->ZeroDetector_1 = ZeroDetectorHappened;
+        engineControl->TimeCounterCrossingPhase = 0;
+        engineControl->TimeCounterPhaseCorrecting = 0;
+        
+        // Боремся с повторным срабатыванием от дребезга
+        EXTI->IMR &= ~EXTI_IMR_MR1;
+    }
+    EXTI_ClearFlag(EXTI_Line1);
+}
+
+void EXTI2_IRQHandler()
+{
+    if(GPIO_ReadInputDataBit(GPIOA, ZERO_DETECTOR_2) == 0)
+    {
+        engineControl->ZeroDetector_2 = ZeroDetectorHappened;
+        EXTI->IMR &= ~EXTI_IMR_MR2; // Отключаем до следующего цикла
+    }
+    EXTI_ClearFlag(EXTI_Line2);
+}</code></pre>
+                <div class="code-caption">
+                    <i class="bi bi-shield"></i>
+                    Отключение прерывания после срабатывания для защиты от дребезга
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <pre><code class="language-c">// engineControl.c - контроль чередования фаз
+void CheckPhaseAlgoritm(EngineControlTypeDef *engineControlTypeDef)
+{
+    EXTI->IMR |= EXTI_IMR_MR1;
+    EXTI->IMR &= ~EXTI_IMR_MR2;
+    engineControlTypeDef->TimeCounterPhaseCorrecting = 0;
+    
+    while (engineControlTypeDef->ZeroDetector_1 != ZeroDetectorHappened)
+    {
+        WaitZeroDetector(engineControlTypeDef, 6);
+    }
+    
+    // Засекаем время до срабатывания второго детектора
+    if (engineControlTypeDef->TimeCounterPhaseCorrecting < PHASE_CORRECTING_TIME)
+    {
+        AlarmState(engineControlTypeDef); // Слишком мало времени
+    }
+    else if (engineControlTypeDef->TimeCounterPhaseCorrecting > PHASE_CORRECTING_MAX)
+    {
+        AlarmState(engineControlTypeDef); // Слишком много времени
+    }
+}</code></pre>
+                <div class="code-caption">
+                    <i class="bi bi-clock-history"></i>
+                    Проверка правильности чередования фаз по таймингам срабатывания
+                </div>
+            </div>
+        </div>
+
+        <!-- КОД: Управление клапанами -->
+        <div class="code-section">
+            <h2><i class="bi bi-valve"></i> 3. Управление 8 клапанами с конечным автоматом</h2>
+            <p>
+                Сложный конечный автомат для управления серией импульсов клапанов.
+            </p>
+            
+            <div class="code-block">
+                <pre><code class="language-c">// valvesControl.c - основной цикл управления
+if(valvesStateEnum == ImpulseActive)
+{
+    if (timeCounter >= (valvesImpulseParametersTypeDef.ImpulseActive / TIM2_TIME))
+    {
+        valvesStateEnum = ImpulsePause;
+        ValveSetState(&valveControlArray[valvesCounter], ImpulsePause);
+        timeCounter = 0;
+    }
+}
+else if(valvesStateEnum == ImpulsePause)
+{
+    if (timeCounter >= TIM2_ONE_SECOND_COUNTER)
+    {
+        secondsCounter++;
+        timeCounter = 0;
+    }
+    if (secondsCounter >= valvesImpulseParametersTypeDef.ImpulsePause)
+    {
+        valvesCounter++;
+        if (valvesCounter >= VALVES_COUNT)
+        {
+            valvesCounter = 0;
+            betweenCyclesCounter++;
+            if(betweenCyclesCounter < valvesImpulseParametersTypeDef.BetweenCyclesCount) 
+            {
+                valvesStateEnum = PauseBetweenCycles;
+            }
+            else 
+            {
+                betweenCyclesCounter = 0;
+                valvesStateEnum = SeriesPeriod;
+            }
+        }
+        else
+        {
+            valvesStateEnum = ImpulseActive;
+        }
+        secondsCounter = 0;
+    }
+}</code></pre>
+                <div class="code-caption">
+                    <i class="bi bi-diagram-2"></i>
+                    Многоуровневый конечный автомат: серия → импульс → пауза → цикл
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <pre><code class="language-c">// valvesControl.c - таймер для клапанов
+void TIM2_IRQHandler()
+{
+    BaseType_t xHigherPriorityTaskWoken = pdFALSE;
+    xSemaphoreGiveFromISR(ValvesTimer_Semaphore, &xHigherPriorityTaskWoken);
+    if (xHigherPriorityTaskWoken == pdTRUE)
+    {
+        portEND_SWITCHING_ISR(xHigherPriorityTaskWoken);
+    }
+    TIM_ClearITPendingBit(TIM2, TIM_IT_Update);
+}</code></pre>
+                <div class="code-caption">
+                    <i class="bi bi-alarm"></i>
+                    Синхронизация с FreeRTOS через семафор из прерывания
+                </div>
+            </div>
+        </div>
+
+        <!-- КОД: DMA + UART протокол -->
+        <div class="code-section">
+            <h2><i class="bi bi-usb-symbol"></i> 4. Обмен с HMI через UART + DMA + CRC</h2>
+            <p>
+                Эффективный обмен данными с панелью оператора.
+            </p>
+            
+            <div class="code-block">
+                <pre><code class="language-c">// hmi_interaction.c - инициализация DMA
+void DMA_init(uint8_t *dataFromUART, uint8_t *dataToUART)
+{
+    // Канал 5 - приём
+    DMA_InitStructure.DMA_BufferSize = DMA_BUFFER_COMMAND_SIZE;
+    DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralSRC;
+    DMA_InitStructure.DMA_MemoryBaseAddr = (uint32_t)dataFromUART;
+    DMA_InitStructure.DMA_PeripheralBaseAddr = (uint32_t)&USART1->DR;
+    DMA_InitStructure.DMA_Mode = DMA_Mode_Circular;
+    DMA_Init(DMA1_Channel5, &DMA_InitStructure);
+    
+    // Канал 4 - передача
+    DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralDST;
+    DMA_InitStructure.DMA_MemoryBaseAddr = (uint32_t)dataToUART;
+    DMA_Init(DMA1_Channel4, &DMA_InitStructure);
+}</code></pre>
+                <div class="code-caption">
+                    <i class="bi bi-arrow-left-right"></i>
+                    Два канала DMA: один на приём (циклический), второй на передачу
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <pre><code class="language-c">// hmi_interaction.c - расчёт CRC8
+uint8_t CalculateCRC8(uint8_t *data, size_t len)
+{
+    uint8_t crc = 0xff;
+    size_t i, j;
+    for (i = 0; i < len; i++) {
+        crc ^= data[i];
+        for (j = 0; j < 8; j++) {
+            if ((crc & 0x80) != 0)
+                crc = (uint8_t)((crc << 1) ^ POLYNOMIAL);
+            else
+                crc <<= 1;
+        }
+    }
+    return crc;
+}</code></pre>
+                <div class="code-caption">
+                    <i class="bi bi-shield-check"></i>
+                    Контроль целостности данных при обмене с панелью
+                </div>
+            </div>
+        </div>
+
+        <!-- КОД: Работа с Flash -->
+        <div class="code-section">
+            <h2><i class="bi bi-memory"></i> 5. Сохранение параметров во Flash</h2>
+            <p>
+                Параметры запуска и работы клапанов сохраняются между перезагрузками.
+            </p>
+            
+            <div class="code-block">
+                <pre><code class="language-c">// flash.c - запись параметров
+void Flash_WriteParameters(uint8_t pageNumber, uint32_t *dataArray, uint8_t lengthArray)
+{
+    uint32_t pageAddress = pageNumber * 1024 + FLASH_PAGE_ADDRESS;
+    
+    FLASH_Unlock();
+    FLASH_ErasePage(pageAddress);
+    
+    for(uint8_t i = 0; i < lengthArray; i++)
+    {
+        address = pageAddress + i * 4;
+        FLASH_ProgramWord(address, dataArray[i]);
+    }
+    FLASH_Lock();
+}
+
+// valvesControl.c - чтение параметров
+if(Flash_Read(29, 0) == FLASH_WRITED)
+{
+    valvesImpulseParametersTypeDef->ImpulseActive = 
+        (Flash_Read(31, 1) | Flash_Read(31, 2) << 8);
+    valvesImpulseParametersTypeDef->ImpulsePause = 
+        (Flash_Read(31, 3) | Flash_Read(31, 4) << 8) * 1000;
+}</code></pre>
+                <div class="code-caption">
+                    <i class="bi bi-save"></i>
+                    Страничная организация: 29-я страница для флага, 31-я для параметров
+                </div>
+            </div>
+        </div>
+
+        <!-- КОД: Измерение тока -->
+        <div class="code-section">
+            <h2><i class="bi bi-graph-up"></i> 6. Измерение тока и защита</h2>
+            <p>
+                Аналоговый вход для контроля тока двигателя.
+            </p>
+            
+            <div class="code-block">
+                <pre><code class="language-c">// engineControl.c - расчёт тока
+int16_t SolveCurrent(uint16_t ADC_value)
+{
+    static int32_t U_ADC = 0;
+    static int32_t U_ADC_current = 0;
+    static int32_t result = 0;
+
+    U_ADC = (ADC_value * ADC_U_REF) / ADC_BIT_DEPTH;
+    U_ADC_current = ((400 * U_ADC - 13200) / 267) + 50;
+    result = ((60 * U_ADC_current - 3000) / 400) - 30;
+    return result;
+}
+
+// В основном цикле задачи
+current_1 = SolveCurrent(ADC1->JDR1);
+if(abs_for_current(current_1) > CURRENT_MAX)
+{
+    MaxCurrent_Alarm(&engineControlTypeDef);
+}</code></pre>
+                <div class="code-caption">
+                    <i class="bi bi-exclamation-triangle"></i>
+                    Защита от превышения тока с немедленным аварийным остановом
+                </div>
+            </div>
+        </div>
+
+        <!-- КОД: FreeRTOS задачи -->
+        <div class="code-section">
+            <h2><i class="bi bi-toggles"></i> 7. Многозадачность FreeRTOS</h2>
+            <p>
+                Разделение функционала на независимые задачи.
+            </p>
+            
+            <div class="code-block">
+                <pre><code class="language-c">// main.c - создание задач
+int main(void)
+{
+    // Создание семафоров и очередей
+    StartEngine_Semaphore = xSemaphoreCreateCounting(10, 0);
+    ValvesImpulseParameters_Queue = xQueueCreate(10, sizeof(ValvesImpulseParametersTypeDef));
+    
+    // Задачи
+    xTaskCreate(EngineControl_Task, "EngineControl_Task", 256, NULL, 8, NULL);
+    xTaskCreate(HMI_Interaction_Task, "HMI_Interaction_Task", 256, NULL, 7, NULL);
+    xTaskCreate(ValvesControl_Task, "ValvesControlTask", 256, NULL, 8, NULL);
+    xTaskCreate(IWatchDog_Task, "IWatchDog_Task", 128, NULL, 8, &IWatchDog_Handler);
+    
+    vTaskStartScheduler();
+}</code></pre>
+                <div class="code-caption">
+                    <i class="bi bi-cpu"></i>
+                    4 задачи: двигатель, HMI, клапаны, watchdog
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <pre><code class="language-c">// iwatchdog.c - сторожевой таймер
+void IWatchDog_Task(void *pvParameters)
+{
+    IWatchDog_init(); // IWDG_Prescaler_32, Reload 125 (100 мс)
+    
+    while(1)
+    {
+        vTaskDelay(50);
+        IWDG_ReloadCounter(); // Сбрасываем каждые 50 мс
+    }
+}</code></pre>
+                <div class="code-caption">
+                    <i class="bi bi-shield"></i>
+                    Отдельная задача для сброса watchdog — защита от зависаний
+                </div>
+            </div>
+        </div>
+
+        <!-- КОД: Борьба с дребезгом кнопок -->
+        <div class="code-section">
+            <h2><i class="bi bi-toggle-on"></i> 8. Аппаратная и программная борьба с дребезгом</h2>
+            <p>
+                Промышленная среда требует особого подхода к обработке кнопок.
+            </p>
+            
+            <div class="code-block">
+                <pre><code class="language-c">// hmi_interaction.c - обработка кнопок
+void EXTI0_IRQHandler()
+{
+    if (GPIO_ReadInputDataBit(GPIOA, START_STOP_BUTTON) == 0)
+    {
+        // Сразу отключаем прерывания для борьбы с дребезгом
+        EXTI->IMR &= ~EXTI_IMR_MR0;
+        EXTI->IMR &= ~EXTI_IMR_MR3;
+
+        BaseType_t xHigherPriorityTaskWoken = pdFALSE;
+        xSemaphoreGiveFromISR(StartEngine_Semaphore, &xHigherPriorityTaskWoken);
+        if (xHigherPriorityTaskWoken == pdTRUE)
+        {
+            portEND_SWITCHING_ISR(xHigherPriorityTaskWoken);
+        }
+    }
+    EXTI_ClearFlag(EXTI_Line0);
+    EXTI_ClearFlag(EXTI_Line3);
+}</code></pre>
+                <div class="code-caption">
+                    <i class="bi bi-stopwatch"></i>
+                    Отключение прерывания сразу после срабатывания + задержка в задаче
+                </div>
+            </div>
+        </div>
+
+        <!-- Честный вывод -->
+        <div class="lessons-section" style="margin: 40px 0;">
+            <h3><i class="bi bi-graph-down"></i> Почему двигатель не запустился?</h3>
+            <p>
+                Анализируя код сейчас, вижу основные причины:
+            </p>
+            <ul>
+                <li><strong>Недостаточный расчёт силовой части</strong> — пусковые токи оказались выше расчётных, тиристоры не открывались полностью</li>
+                <li><strong>Помехи от двигателя</strong> — влияли на детекторы нуля, алгоритм сбивался</li>
+                <li><strong>Отсутствие обратной связи</strong> — не было контроля реальной скорости вращения, только разомкнутое управление по углу</li>
+                <li><strong>Ложные срабатывания клапанов</strong> — из-за наводок по цепям питания, не хватило развязки</li>
+            </ul>
+            <p style="margin-top: 15px; font-weight: 500;">
+                <i class="bi bi-check-circle" style="color: #28a745;"></i> 
+                Сейчас я бы добавил: оптронную развязку, снабберные цепи, фильтры на входах детекторов, 
+                программную фильтрацию измерений и замкнутый контур регулировки.
+            </p>
+        </div>
+
+        <!-- Кнопка возврата -->
+        <div style="text-align: center; margin: 40px 0;">
+            <a href="index.html" class="btn btn-secondary">← Вернуться ко всем проектам</a>
+        </div>
+    </main>
+    
+    <footer style="background: #333; color: white; padding: 30px 0; margin-top: 60px;">
+        <div class="container">
+            <p style="text-align: center;">
+                © 2026 Портфолио embedded-разработчика | 
+                <i class="bi bi-cpu"></i> Первый проект — ценный опыт
+            </p>
+        </div>
+    </footer>
+    <!-- Галерея изображений -->
+    <script src="js/gallery.js"></script>
+</body>
+</html>

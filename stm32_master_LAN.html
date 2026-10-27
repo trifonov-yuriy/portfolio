@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Устройство связи STM32F407VET6 (RS-485, CAN, Ethernet) | Портфолио</title>
+
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+        .project-header {
+            background: linear-gradient(135deg, #134e5e 0%, #71b280 100%);
+            color: white;
+            padding: 60px 0;
+            margin-bottom: 40px;
+        }
+
+        .project-title { font-size: 2.5rem; margin-bottom: 15px; }
+        .project-subtitle { font-size: 1.2rem; opacity: 0.9; }
+
+        .project-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .model-section {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .model-container {
+            width: 100%;
+            height: 500px;
+            background: #1a1a1a;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        model-viewer { width: 100%; height: 100%; --poster-color: transparent; }
+
+        .specs-section {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .specs-list { list-style: none; }
+        .specs-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+        }
+        .specs-list li:last-child { border-bottom: none; }
+        .spec-icon { width: 24px; margin-right: 12px; color: #134e5e; }
+
+        .description-section {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .description-section h2 { margin-bottom: 20px; color: #2d3748; }
+        .description-section p { margin-bottom: 15px; color: #4a5568; }
+        .description-section ul { margin-left: 20px; margin-bottom: 20px; color: #4a5568; }
+        .description-section li { margin-bottom: 10px; }
+
+        .gallery-section {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .gallery-item {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+
+        .gallery-item img:hover { transform: scale(1.05); }
+
+        .back-link {
+            display: inline-block;
+            margin: 20px 0;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            opacity: 0.9;
+        }
+        .back-link:hover { opacity: 1; text-decoration: underline; }
+
+        .schematic-section {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .schematic-image {
+            width: 100%;
+            max-width: 800px;
+            margin: 20px auto;
+            display: block;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-primary { background: #134e5e; color: white; }
+        .btn-primary:hover { background: #0d3843; }
+        .btn-secondary { background: #6c757d; color: white; }
+        .btn-secondary:hover { background: #5a6268; }
+
+        .tag {
+            background: #e9ecef;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: #495057;
+            display: inline-block;
+        }
+
+        .badge-outcome {
+            background: #28a745;
+            color: white;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            display: inline-block;
+        }
+
+        .modular-badge {
+            background: #e3f2fd;
+            border-left: 4px solid #134e5e;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .feature-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .feature-item i { font-size: 2rem; color: #134e5e; margin-bottom: 10px; }
+
+        @media (max-width: 768px) {
+            .project-content { grid-template-columns: 1fr; }
+            .project-title { font-size: 2rem; }
+            .model-container { height: 350px; }
+            .feature-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header class="project-header">
+        <div class="container">
+            <a href="index.html" class="back-link">← Назад к проектам</a>
+            <h1 class="project-title">Устройство связи на STM32F407VET6</h1>
+            <p class="project-subtitle">Master-устройство с интерфейсами RS-485, CAN и Ethernet в корпусе на DIN-рейку</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="project-content">
+            <div>
+                <div class="model-section">
+                    <h2>3D-модель платы</h2>
+                    <div class="model-container">
+                        <model-viewer
+                            src="3d/stm32_master_LAN.glb"
+                            alt="3D модель платы STM32F407VET6 с Ethernet"
+                            auto-rotate
+                            camera-controls
+                            ar-status="not-presenting"
+                            shadow-intensity="1"
+                            exposure="1"
+                            environment-image="neutral"
+                            style="width:100%; height:100%;">
+                        </model-viewer>
+                    </div>
+                    <p style="margin-top: 10px; color: #666; font-size: 0.9rem;">
+                        👆 Вращайте мышкой, чтобы рассмотреть плату со всех сторон
+                    </p>
+                </div>
+                <div class="model-section">
+                    <h2>3D-модель платы в корпусе</h2>
+                    <div class="model-container">
+                        <model-viewer
+                            src="3d/stm32_master_LAN_korpus.glb"
+                            alt="3D модель платы STM32F407VET6 с Ethernet в корпусе"
+                            auto-rotate
+                            camera-controls
+                            ar-status="not-presenting"
+                            shadow-intensity="1"
+                            exposure="1"
+                            environment-image="neutral"
+                            style="width:100%; height:100%;">
+                        </model-viewer>
+                    </div>
+                    <p style="margin-top: 10px; color: #666; font-size: 0.9rem;">
+                        👆 Вращайте мышкой, чтобы рассмотреть плату со всех сторон
+                    </p>
+                </div>
+                <div class="description-section">
+                    <h2>О проекте</h2>
+                    <p>
+                        Расширенная версия master-устройства на STM32F407VET6. В отличие от
+                        версии на F103, добавлен Ethernet-интерфейс, что позволяет подключать
+                        устройство напрямую в локальную сеть и обмениваться данными с верхним
+                        уровнем (SCADA / сервер) по TCP/IP.
+                    </p>
+
+                    <div class="modular-badge">
+                        <strong>🔧 Назначение:</strong> шлюз между промышленными шинами
+                        (RS-485, CAN) и Ethernet-сетью. Собирает данные с исполнительных
+                        устройств и отдаёт их по сети.
+                    </div>
+
+                    <h3>Ключевые особенности:</h3>
+                    <div class="feature-grid">
+                        <div class="feature-item">
+                            <i class="bi bi-ethernet"></i>
+                            <h4>Ethernet</h4>
+                            <small>PHY + трансформатор, подключение в LAN</small>
+                        </div>
+                        <div class="feature-item">
+                            <i class="bi bi-hdd-network"></i>
+                            <h4>RS-485</h4>
+                            <small>Промышленная шина с защитой</small>
+                        </div>
+                        <div class="feature-item">
+                            <i class="bi bi-diagram-2"></i>
+                            <h4>CAN</h4>
+                            <small>Связь с приводами и датчиками</small>
+                        </div>
+                        <div class="feature-item">
+                            <i class="bi bi-box"></i>
+                            <h4>DIN-рейка</h4>
+                            <small>Размеры под стандартный корпус</small>
+                        </div>
+                    </div>
+
+                    <h3>Состояние проекта</h3>
+                    <p>
+                        <span class="badge-outcome"><i class="bi bi-check-circle me-1"></i>Успешно внедрён</span>
+                    </p>
+                </div>
+            </div>
+
+            <div>
+                <div class="specs-section">
+                    <h2>Характеристики</h2>
+                    <ul class="specs-list">
+                        <li><span class="spec-icon">🔹</span><strong>Микроконтроллер:</strong> STM32F407VET6</li>
+                        <li><span class="spec-icon">🔹</span><strong>Интерфейсы:</strong> RS-485, CAN, Ethernet</li>
+                        <li><span class="spec-icon">🔹</span><strong>Роль:</strong> Master-устройство / шлюз</li>
+                        <li><span class="spec-icon">🔹</span><strong>Питание:</strong> 12–24 В</li>
+                        <li><span class="spec-icon">🔹</span><strong>Корпус:</strong> DIN-рейка</li>
+                        <li><span class="spec-icon">🔹</span><strong>Количество слоёв:</strong> 4</li>
+                    </ul>
+
+                    <div style="margin-top: 25px;">
+                        <h3>Технологии</h3>
+                        <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 15px;">
+                            <span class="tag">STM32F407</span>
+                            <span class="tag">Altium Designer</span>
+                            <span class="tag">4-слойная плата</span>
+                            <span class="tag">RS-485</span>
+                            <span class="tag">CAN</span>
+                            <span class="tag">Ethernet</span>
+                            <span class="tag">LwIP</span>
+                            <span class="tag">C / HAL</span>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 20px; background: #f8f9fa; padding: 20px; border-radius: 8px;">
+                        <h4 style="margin-bottom: 10px;">📦 Состав:</h4>
+                        <ul style="list-style: none;">
+                            <li>✓ STM32F407VET6</li>
+                            <li>✓ Ethernet PHY + трансформатор</li>
+                            <li>✓ Трансиверы RS-485 и CAN</li>
+                            <li>✓ Цепи защиты линий</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="schematic-section">
+            <h2>Структурная схема</h2>
+            <img src="images/stm32_master_LAN_general.png" alt="Структурная схема устройства" class="schematic-image" onclick="openModal(this)">
+            <p style="text-align: center; color: #666; margin-top: 15px;">
+                МК, Ethernet PHY, трансиверы RS-485/CAN и защита линий
+            </p>
+        </div>
+
+        <div class="gallery-section">
+            <h2>Проектирование в Altium Designer</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="images/stm32_master_LAN_top.png" alt="Верхний слой" onclick="openModal(this)">
+                    <div style="padding: 10px; text-align: center;">Верхний слой</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/stm32_master_LAN_gnd.png" alt="2-й слой земли" onclick="openModal(this)">
+                    <div style="padding: 10px; text-align: center;">2-й слой (земля)</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/stm32_master_LAN_V.png" alt="3-й слой питания" onclick="openModal(this)">
+                    <div style="padding: 10px; text-align: center;">3-й слой (питание)</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/stm32_master_LAN_bottom.png" alt="Нижний слой" onclick="openModal(this)">
+                    <div style="padding: 10px; text-align: center;">Нижний слой</div>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin: 40px 0;">
+            <a href="index.html" class="btn btn-secondary">← Вернуться ко всем проектам</a>
+        </div>
+    </main>
+
+    <footer style="background: #333; color: white; padding: 30px 0; margin-top: 60px;">
+        <div class="container">
+            <p style="text-align: center;">© 2026 Мое портфолио embedded-разработчика</p>
+        </div>
+    </footer>
+    <script src="js/gallery.js"></script>
+</body>
+</html>
